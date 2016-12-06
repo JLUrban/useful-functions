@@ -35,3 +35,13 @@ class pcolor:
     NOBOLD       = "\x1b[00m"
     UNDERLINE  = "\X1b[04m"
     BLACK      = "\x1b[0m"
+    
+    
+    
+def ndmesh(*argss):
+    ll = 1
+    for argg in argss:
+        ll = ll*len(argg)
+    args = map(np.asarray,argss)
+    derp = np.broadcast_arrays(*[x[(slice(None),)+(None,)*i] for i, x in enumerate(args)])
+    return np.array([derp]).reshape(len(argss),ll).T
